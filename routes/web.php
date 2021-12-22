@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,9 @@ Route::group(['middleware'=> ['auth']], function (){
     Route::get('/requests', function (){
        return view('requests.list_request');
     })->name('requests');
+
+    Route::get('/requests/{id}', [RequestController::class, 'detail'])->name('request.detail');
+
 });
 
 

@@ -11,7 +11,12 @@ window.Vue = require('vue').default;
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import routes from './router.js'
+import locale from 'element-ui/lib/locale/lang/en'
 
+Vue.use(ElementUI, { locale });
+
+Vue.use(routes);
 
 Vue.use(ElementUI);
 
@@ -28,6 +33,7 @@ Vue.use(ElementUI);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('requests', require('./components/ListRequests.vue').default);
+Vue.component('request-detail', require('./components/DetailRequest.vue').default);
     /**
      * Next, we will create a fresh Vue application instance and attach it to
      * the page. Then, you may begin adding components to this application
@@ -36,4 +42,5 @@ Vue.component('requests', require('./components/ListRequests.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router: routes,
 });

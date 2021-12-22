@@ -57,14 +57,10 @@
                  <el-table-column
                          fixed="right"
                          label="Operations"
+                         prop="id"
                          width="120">
-                     <template slot-scope="scope">
-                         <el-button
-                                 @click.native.prevent="deleteRow(scope.$index, tableData)"
-                                 type="text"
-                                 size="small">
-                             Detail
-                         </el-button>
+                     <template slot-scope="prop">
+                         <a v-bind:href="link_detail + prop.row.id">Detail</a>
                      </template>
                  </el-table-column>
              </el-table>
@@ -82,6 +78,7 @@
         data() {
             return {
                 input: "",
+                link_detail: "http://127.0.0.1:8080/requests/",
                 requests: null,
                 multisite: "MULTISITE",
                 ruleForm: {
@@ -135,6 +132,7 @@
                 console.log(data);
                 data.results.forEach(item => {
                     var obj = {
+                        id: item.id,
                         keyword: item.data.keyword,
                         status: item.status,
                         source_type: item.data.source_type.join(", "),
@@ -144,8 +142,11 @@
                 });
                 console.log(this.tableData);
             },
-            handleClick(){
+            deleteRow(index, tabledata){
+                console.log("****")
+                console.log(index);
 
+                console.log(tabledata);
             },
             convertDataToSent(data){
                 if(data.type.length === 1){
